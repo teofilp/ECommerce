@@ -8,12 +8,16 @@
     </PropertyGroup>
     
     <ItemGroup>
+        <PackageReference Include="MassTransit" Version="8.0.15" />
+        <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.3.1" />
+        <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.15" />
         <PackageReference Include="MediatR" Version="12.0.1" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     </ItemGroup>
     
     <ItemGroup>
       <ProjectReference Include="..\ECommerce.Business\ECommerce.Business.csproj" />
+      <ProjectReference Include="..\ECommerce.Consumers\ECommerce.Consumers.csproj" />
       <ProjectReference Include="..\ECommerce.UI\ECommerce.UI.csproj" />
     </ItemGroup>
 </Project>

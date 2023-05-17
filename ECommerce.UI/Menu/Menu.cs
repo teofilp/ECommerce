@@ -1,28 +1,17 @@
 using ECommerce.UI.Commands;
-using Microsoft.Extensions.Hosting;
 
 namespace ECommerce.UI.Menu;
 
-public class MenuService : IHostedService
+public class Menu 
 {
     private List<ICommand> _commands;
 
-    public MenuService(IEnumerable<ICommand> commands)
+    public Menu(IEnumerable<ICommand> commands)
     {
         _commands = commands.ToList();
     }
 
-    public async Task StartAsync(CancellationToken cancellationToken)
-    {
-        await Run();
-    }
-
-    public Task StopAsync(CancellationToken cancellationToken)
-    {
-        return Task.CompletedTask;
-    }
-
-    private async Task Run()
+    public async Task Run()
     {
         while (true)
         {
@@ -51,7 +40,7 @@ public class MenuService : IHostedService
     {
         var menuText =  _commands
             .Select((command, index) => $"{index + 1}. {command.Title}")
-            .Aggregate((a, b) => $"{a} \n {b}");
+            .Aggregate((a, b) => $"{a} \n{b}");
 
         var exitCommandText = $"\n{_commands.Count() + 1}. Exit \n";
         

@@ -2,20 +2,51 @@
 
 using ECommerce.Business;
 using ECommerce.Business.Handlers;
+using ECommerce.Consumers;
+using ECommerce.Contracts;
 using ECommerce.UI.Commands;
 using ECommerce.UI.Menu;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MassTransit;
+using MassTransit.Configuration;
+using MassTransit.RabbitMqTransport.Topology;
+using PingCommand = ECommerce.UI.Commands.PingCommand;
 
-await Host.CreateDefaultBuilder()
+using var host =  Host.CreateDefaultBuilder()
     .ConfigureServices(services =>
     {
         services.AddMediatR(cfg => 
             cfg.RegisterServicesFromAssemblyContaining<GetAllProductsQueryHandler>());
-        services.AddHostedService<MenuService>();
+
+        services.AddMassTransit(x =>
+        {
+            x.AddConsumers(typeof(PingConsumer).Assembly);
+            x.UsingRabbitMq((context, cfg) =>
+            {
+                cfg.ConfigureEndpoints(context);
+                cfg.Host("localhost", "/", h =>
+                {
+                    h.Username("user");
+                    h.Password("password");
+                });
+            });
+        });
+        
+        services.AddSingleton<Menu>();
         services.AddSingleton<ProductsService>();
         
         services.AddTransient<ICommand, GetAllProductsCommand>();
+        services.AddTransient<ICommand, PingCommand>();
     })
-    .Build()
-    .StartAsync();
+    .Build();
+    
+    await host.StartAsync();
+
+    var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
+    var menu = host.Services.GetRequiredService<Menu>();
+    
+    await menu!.Run();
+    
+    lifetime.StopApplication();
+    await host.WaitForShutdownAsync();

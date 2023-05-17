@@ -18,8 +18,6 @@ public class GetAllProductsCommand : ICommand
 
     public string Title => "Get all products";
 
-    public void GetArguments() { }
-
     public async Task Handle()
     {
         var items = await _mediator.Send(new GetAllProductsQuery());
