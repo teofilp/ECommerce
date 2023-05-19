@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.UI", "ECommerce.UI\ECommerce.UI.csproj", "{80285DDF-20F1-4D7B-B461-D632306F1238}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce", "ECommerce\ECommerce.csproj", "{A59BB0ED-84BB-459B-9442-2371FDA55C51}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Business", "ECommerce.Business\ECommerce.Business.csproj", "{858447FE-068F-435D-89BE-7350A355B043}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Data", "ECommerce.Data\ECommerce.Data.csproj", "{2BA29EF7-720F-4543-BFBB-01A9ECD04332}"
@@ -11,6 +9,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Contracts", "ECommerce.Contracts\ECommerce.Contracts.csproj", "{D61D8DCE-E445-4713-BBAA-ED7CB3223E2F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Consumers", "ECommerce.Consumers\ECommerce.Consumers.csproj", "{F49D1136-99D6-4232-B622-D525284D06F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.API", "ECommerce.API\ECommerce.API.csproj", "{BF1520B3-9C18-4570-9052-DED0BB3A6418}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.ProductDetailsService", "ECommerce.ProductDetailsService\ECommerce.ProductDetailsService.csproj", "{BE003A16-1222-431C-8FE8-3DC11DF76785}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,10 +24,6 @@ Global
 		{80285DDF-20F1-4D7B-B461-D632306F1238}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80285DDF-20F1-4D7B-B461-D632306F1238}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80285DDF-20F1-4D7B-B461-D632306F1238}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A59BB0ED-84BB-459B-9442-2371FDA55C51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A59BB0ED-84BB-459B-9442-2371FDA55C51}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A59BB0ED-84BB-459B-9442-2371FDA55C51}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A59BB0ED-84BB-459B-9442-2371FDA55C51}.Release|Any CPU.Build.0 = Release|Any CPU
 		{858447FE-068F-435D-89BE-7350A355B043}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{858447FE-068F-435D-89BE-7350A355B043}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{858447FE-068F-435D-89BE-7350A355B043}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -42,5 +40,13 @@ Global
 		{F49D1136-99D6-4232-B622-D525284D06F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F49D1136-99D6-4232-B622-D525284D06F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F49D1136-99D6-4232-B622-D525284D06F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF1520B3-9C18-4570-9052-DED0BB3A6418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF1520B3-9C18-4570-9052-DED0BB3A6418}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF1520B3-9C18-4570-9052-DED0BB3A6418}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF1520B3-9C18-4570-9052-DED0BB3A6418}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE003A16-1222-431C-8FE8-3DC11DF76785}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE003A16-1222-431C-8FE8-3DC11DF76785}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE003A16-1222-431C-8FE8-3DC11DF76785}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE003A16-1222-431C-8FE8-3DC11DF76785}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -3,17 +3,12 @@
 using ECommerce.Business;
 using ECommerce.Business.Handlers;
 using ECommerce.Consumers;
-using ECommerce.Contracts;
 using ECommerce.UI.Commands;
 using ECommerce.UI.Menu;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using MassTransit;
-using MassTransit.Configuration;
-using MassTransit.RabbitMqTransport.Topology;
 using PingCommand = ECommerce.UI.Commands.PingCommand;
 
-using var host =  Host.CreateDefaultBuilder()
+using var app =  new WebHostBuilder()
     .ConfigureServices(services =>
     {
         services.AddMediatR(cfg => 
@@ -41,12 +36,12 @@ using var host =  Host.CreateDefaultBuilder()
     })
     .Build();
     
-    await host.StartAsync();
+    await app.StartAsync();
 
-    var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
-    var menu = host.Services.GetRequiredService<Menu>();
-    
-    await menu!.Run();
-    
-    lifetime.StopApplication();
-    await host.WaitForShutdownAsync();
+    // var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
+    // var menu = host.Services.GetRequiredService<Menu>();
+    //
+    // await menu!.Run();
+    //
+    // lifetime.StopApplication();
+    // await host.WaitForShutdownAsync();
