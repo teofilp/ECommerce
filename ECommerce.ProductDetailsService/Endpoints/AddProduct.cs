@@ -1,7 +1,7 @@
+using ECommerce.Common.Services;
 using ECommerce.ProductDetailsService.Database;
 using ECommerce.ProductDetailsService.Domain;
 using ECommerce.ProductDetailsService.Requests;
-using ECommerce.ProductDetailsService.Services;
 using FastEndpoints;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -21,22 +21,22 @@ public class AddProduct : Endpoint<AddProductRequest>
 
     public override async Task HandleAsync(AddProductRequest req, CancellationToken ct)
     {
-        await _mediator.Send(new AddProductCommand
+        var id = await _mediator.Send(new AddProductCommand
         {
             Name = req.Name,
             Description = req.Description
         }, ct);
         
-        await SendOkAsync(ct);
+        await SendOkAsync(id, ct);
     }
 }
 
-public class AddProductCommand : IRequest<bool> {
+public class AddProductCommand : IRequest<Guid> {
     public string Name { get; set; }
     public string Description { get; set; }
 }
 
-public class AddProductCommandHandler : IRequestHandler<AddProductCommand, bool>
+public class AddProductCommandHandler : IRequestHandler<AddProductCommand, Guid>
 {
     private readonly ProductsDetailsContext _context;
     private readonly IDateTimeProvider _dateTimeProvider;
@@ -47,15 +47,20 @@ public class AddProductCommandHandler : IRequestHandler<AddProductCommand, bool>
         _dateTimeProvider = dateTimeProvider;
     }
 
-    public async Task<bool> Handle(AddProductCommand request, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(AddProductCommand request, CancellationToken cancellationToken)
     {
-        _context.Products.Add(new Product
+
+        var product = new Product
         {
             Name = request.Name,
             Description = request.Description,
             CreatedAt = _dateTimeProvider.UtcNow
-        });
+        };
+        
+        _context.Products.Add(product);
 
-        return await _context.SaveChangesAsync(cancellationToken) > 0;
+        await _context.SaveChangesAsync(cancellationToken);
+        
+        return product.Id;
     }
 }

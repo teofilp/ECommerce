@@ -1,6 +1,4 @@
-using ECommerce.Common.Services;
-
-namespace ECommerce.ProductDetailsService.Services;
+namespace ECommerce.Common.Services;
 
 public class DateTimeProvider : IDateTimeProvider
 {

@@ -1,34 +1,30 @@
-using System.Text.Json;
+using ECommerce.Pricing.Consumers;
+using ECommerce.Pricing.Database;
 using MassTransit;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers()
-    .AddJsonOptions(x =>
-    {
-        x.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-    });
-
-builder.Services.AddRouting(x => x.LowercaseUrls = true);
+builder.Services.AddDbContext<PricingContext>(b =>
+    b.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<Program>());
-builder.Services.AddHttpClient();
-
 builder.Services.AddMassTransit(x =>
 {
-    x.UsingRabbitMq((context, cfg) =>
+    x.AddConsumersFromNamespaceContaining<AddProductPriceConsumer>();
+    x.UsingRabbitMq((ctx, cfg) =>
     {
-        cfg.ConfigureEndpoints(context);
-        cfg.Host("localhost", "/", c =>
+        cfg.Host("host", "/", c =>
         {
             c.Username("user");
             c.Password("password");
         });
+
+        cfg.ConfigureEndpoints(ctx);
     });
 });
 
@@ -44,7 +40,5 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
-app.MapControllers();
 
 app.Run();
