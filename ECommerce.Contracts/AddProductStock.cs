@@ -2,10 +2,10 @@ using MassTransit;
 
 namespace ECommerce.Contracts;
 
-public record AddProductPrice : CorrelatedBy<Guid>
+public record AddProductStock : CorrelatedBy<Guid>
 {
     public Guid ProductId { get; set; }
-    public decimal Price { get; set; }
+    public int Stock { get; set; }
 
     public Guid CorrelationId => ProductId;
 }

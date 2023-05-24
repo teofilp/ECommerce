@@ -4,6 +4,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>ECommerce.PricingService</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -13,9 +14,13 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.5" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ECommerce.Common\ECommerce.Common.csproj" />
+      <ProjectReference Include="..\ECommerce.Contracts\ECommerce.Contracts.csproj" />
     </ItemGroup>
 
 </Project>

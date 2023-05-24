@@ -1,4 +1,4 @@
-namespace ECommerce.Pricing.Domain;
+namespace ECommerce.PricingService.Domain;
 
 public class ProductPrice
 {

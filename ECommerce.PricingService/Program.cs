@@ -1,5 +1,7 @@
-using ECommerce.Pricing.Consumers;
-using ECommerce.Pricing.Database;
+using ECommerce.Common.Services;
+using ECommerce.Contracts;
+using ECommerce.PricingService.Consumers;
+using ECommerce.PricingService.Database;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,12 +15,16 @@ builder.Services.AddDbContext<PricingContext>(b =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddTransient<IDateTimeProvider, DateTimeProvider>();
+
+builder.Services.AddAuthorization();
+
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumersFromNamespaceContaining<AddProductPriceConsumer>();
     x.UsingRabbitMq((ctx, cfg) =>
     {
-        cfg.Host("host", "/", c =>
+        cfg.Host("localhost", "/", c =>
         {
             c.Username("user");
             c.Password("password");

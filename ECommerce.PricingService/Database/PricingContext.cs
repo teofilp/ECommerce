@@ -1,7 +1,7 @@
-using ECommerce.Pricing.Domain;
+using ECommerce.PricingService.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace ECommerce.Pricing.Database;
+namespace ECommerce.PricingService.Database;
 
 public class PricingContext : DbContext
 {

@@ -1,6 +1,5 @@
 using ECommerce.Common.Services;
 using ECommerce.ProductDetailsService.Database;
-using ECommerce.ProductDetailsService.Services;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 
